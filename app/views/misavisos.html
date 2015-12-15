@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="favicon.ico">
+
+    <title>TFM - Gestión de Citas</title>
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/blog.css" rel="stylesheet">
+    
+  </head>
+
+  <body ng-controller="MisAvisosCtrl">
+
+   <div class="container">
+      <div class="page-header">
+        <h1>TFM - GESTIÓN DE CITAS</h1>
+      </div>
+      <p class="lead">Bienvenido <b>{{usuario}}</b> !!</p>
+      
+      <div class="list-group" ng-repeat="aviso in avisos" ng-show="aviso.vigente == true">
+         <a href="#" onclick="return false;" class="list-group-item active">
+          <h4 class="list-group-item-heading">{{aviso.titulo}}</h4>
+          <p class="list-group-item-text">{{aviso.contenido}}</p>
+          <span class="pull-right">
+          <button class="btn btn-xs btn-warning" ng-click="modificarAviso(aviso.$id)" data-target="#editModal" ng-show="administrador === true">MODIFICAR</button>
+          <button class="btn btn-xs btn-danger" ng-click="confirmarBorrado(aviso.$id)" data-target="#deleteModal" ng-show="administrador === true">ELIMINAR</button>
+          </span>
+        </a>
+      </div>
+    </div> 
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabel">Actualizar Aviso</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Título:</label>
+                        <input type="text" class="form-control" ng-model="avisoAActualizar.titulo" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Contenido:</label>
+                        <textarea class="form-control" id="message-text" ng-model="avisoAActualizar.contenido"></textarea>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label">Vigente:</label>
+                        <input type="checkbox" ng-model="avisoAActualizar.vigente">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" ng-click="update()">Publicar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align:center;">
+        <h4 class="modal-title" style="color:red;" id="deleteModalLabel">El aviso se eliminará de manera permanente</h4>
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="borrarAviso()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted"></p>
+      </div>
+    </footer>
+
+</body></html>

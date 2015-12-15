@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Crear Usuario</title>
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"> 
+	<link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <link href="/styles/justified-nav.css" rel="stylesheet">
+    
+  </head>
+
+  <body ng-controller="Login">
+
+    <div class="container">
+      <div class="jumbotron" style="padding-bottom:0px;">
+        <h2>Crear Usuario</h2>
+      </div>
+	<form class="form-horizontal" name="loginForm" role="form">
+	<div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid }">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" ng-model="usuario.email">
+        <p class="help-block" ng-show="loginForm.email.$invalid">Introduzca un email válido.</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid }">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" ng-model="usuario.password" ng-minlength="6">
+        <p class="help-block" ng-show="loginForm.password.$error.minlength">La longitud mínima de la contraseña es 6 caracteres</p>
+    </div>
+	<div class="form-group" ng-class="{ 'has-error' : loginForm.nombre.$error.required }">
+        <label>Nombre</label>
+        <input type="nombre" placeholder="Nombre" name="nombre" class="form-control" ng-model="usuario.nombre" required>
+        <p class="help-block" ng-show="loginForm.nombre.$error.required">El nombre es obligatorio</p>
+    </div>
+	<div class="form-group" ng-class="{ 'has-error' : loginForm.apellido1.$error.required }">
+        <label>Primer apellido</label>
+        <input type="apellido1" placeholder="Primer Apellido" name="apellido1" class="form-control" ng-model="usuario.apellido1" required>
+        <p class="help-block" ng-show="loginForm.apellido1.$error.required">El primer apellido es obligatorio</p>
+    </div>
+	<div class="form-group">
+        <label>Segundo Apellido</label>
+        <input type="apellido2" placeholder="Segundo apellido" name="apellido2" class="form-control" ng-model="usuario.apellido2">
+    </div>
+	<div class="form-group">
+        <label>Documento de Identificación</label>
+        <input type="docIdent" placeholder="DNI/NIE/Pasaporte" name="docIdent" class="form-control" ng-model="usuario.docIdent">
+    </div>
+	<div class="form-group">
+        <label>Domicilio</label>
+        <input type="domicilio" placeholder="Domicilio" name="domicilio" class="form-control" ng-model="usuario.domicilio">
+    </div>
+	<div class="form-group">
+		<label for="perfil">Perfil</label>
+		<select name="perfil" id="perfil" ng-model="perfiles.perfil">
+			<option ng-repeat="perfil in perfiles.opciones" value="{{perfil.descripcion}}">{{perfil.descripcion}}</option>
+		</select>
+    </div>
+
+    <button ng-disabled="!usuario.email || !usuario.password || !usuario.nombre || !usuario.apellido1" type="button" ng-click="crearUsuario()" class="btn btn-lg btn-primary btn-block">Crear</button>
+	</form>
+    </div>
+</body></html>
+
+

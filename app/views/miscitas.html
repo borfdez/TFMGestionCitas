@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="tfmgestionCitasApp">
+<head>
+  <title>Mis Citas</title>
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body >
+  <div  class="container" >
+    <h1>Mis Citas</h1>
+    <hr>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+          <input type="text" class="form-control" placeholder="Buscar Cita" ng-model="cita.fecha">
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              <a href="" ng-click="ordenarPor('fecha')">
+                Fecha
+              </a>
+              <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-especialista')"></span>
+            </th>
+            <th>Especialista</th>
+			<th>Observaciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="cita in citas | orderBy:ordenSeleccionado | filter:cita.fecha" ng-show="cita.usuarioCita == usuario">
+            <td>{{cita.fecha | date:'fullDate'}} a las {{cita.fecha | date:'HH:mm'}}h</td>
+            <td>{{cita.especialista | uppercase}}</td>
+			<td>{{cita.observaciones}}</td>
+			<td><a class="btn btn-danger" ng-click="confirmarCancelacion(cita.$id)" data-target="#deleteModal">Cancelar Cita</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+	
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align:center;">
+        <h4 class="modal-title" style="color:red;" id="deleteModalLabel">La cita se eliminará de manera permanente</h4>
+      </div>
+     
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="cancelarCita()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

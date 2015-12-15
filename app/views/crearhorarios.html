@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+	<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Crear Usuario</title>
+	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/justified-nav.css" rel="stylesheet">
+    
+  </head>
+
+  <body ng-controller="Horarios">
+
+    <div class="container">
+      <div class="jumbotron" style="padding-bottom:0px;">
+        <h2>Crear Horario para Cita</h2>
+      </div>
+	<form class="form-horizontal" name="nuevoHorarioForm" role="form">
+
+	<div class="form-group">
+        <label>Categoría</label>
+        <input type="categoria" placeholder="Categoria" name="categoria" class="form-control" ng-model="horario.categoria"></input>
+    </div>
+	<div class="form-group">
+        <label>Observaciones</label>
+        <textarea type="observaciones" placeholder="Observaciones" name="observaciones" class="form-control" ng-model="horario.observaciones"></textarea>
+    </div>
+	<div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" class="form-control" ng-model="horario.fecha" required/>
+    </div>
+    <div class="form-group">
+        <label for="hora">Hora</label>
+        <input type="time" id="hora" placeholder="HH:mm" min="08:00:00" max="19:00:00" class="form-control" ng-model="horario.hora" required/>
+    </div>
+	<div class="form-group">
+		<label for="especialista">Especialista</label>
+		<select name="especialista" id="especialista" ng-model="especialistas">
+			<option ng-repeat="especialista in especialistas track by $index" value="{{especialista.nombre}} {{especialista.apellido1}}" ng-show="especialista.perfil == 'Especialista'">{{especialista.nombre}} {{especialista.apellido1}} - {{especialista.email}}</option>
+		</select>
+    </div>
+    <button ng-disabled="!horario.fecha || !horario.hora" type="button" ng-click="crearHorario()" class="btn btn-lg btn-primary btn-block">Crear</button>
+	</form>
+    </div>
+</body></html>
+
+

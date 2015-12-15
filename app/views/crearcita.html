@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+	<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Crear Cita</title>
+    <link href="/styles/justified-nav.css" rel="stylesheet">
+    
+  </head>
+
+  <body ng-app="tfmgestionCitasApp">
+
+    <div class="container" ng-controller="MisCitas">
+      <div class="jumbotron" style="padding-bottom:0px;">
+        <h2>Crear Cita</h2>
+      </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>
+              <a href="" ng-click="ordenarPor('fecha')">
+                Fecha
+              </a>
+              <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-especialista')"></span>
+            </th>
+            <th>Especialista</th>
+			<th>Observaciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="cita in citas | orderBy:ordenSeleccionado"  ng-show="cita.disponible == true">
+            <td>{{cita.fecha | date:'fullDate'}} a las {{cita.fecha | date:'HH:mm'}} horas</td>
+            <td>{{cita.especialista | uppercase}}</td>
+			<td>{{cita.observaciones}}</td>
+			<td><a class="btn btn-success" ng-click="crearCita(cita.$id)">Solicitar Cita</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+</body></html>
+
+
